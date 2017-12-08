@@ -847,6 +847,21 @@ class mod_assign_renderer extends plugin_renderer_base {
             $row->cells = array($cell1, $cell2);
             $t->data[] = $row;
         }
+        
+        if($status->view == assign_submission_status::STUDENT_VIEW){
+            $cutoffdate = 0;
+                $cutoffdate = $status->cutoffdate;
+                if($cutoffdate){
+                    if($cutoffdate > $status->duedate){
+                        $row = new html_table_row();
+                        $cell1c = new html_table_cell(get_string('latesubmissions', 'assign'));
+                        $late = get_string('latesubmissionsaccepted', 'assign', userdate($status->cutoffdate));
+                        $cell2c = new html_table_cell($late);
+                        $row->cells = array($cell1c, $cell2c);
+                        $t->data[] = $row;
+                    }
+                }
+        }
 
         // Show graders whether this submission is editable by students.
         if ($status->view == assign_submission_status::GRADER_VIEW) {
