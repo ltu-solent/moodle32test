@@ -849,9 +849,9 @@ class mod_assign_renderer extends plugin_renderer_base {
         }
         
         if($status->view == assign_submission_status::STUDENT_VIEW){
-            $cutoffdate = 0;
+            $cutoffdate = null;
                 $cutoffdate = $status->cutoffdate;
-                if($cutoffdate){
+                if(isset($cutoffdate)){
                     if($cutoffdate > $status->duedate){
                         $row = new html_table_row();
                         $cell1c = new html_table_cell(get_string('latesubmissions', 'assign'));
